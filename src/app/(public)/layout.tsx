@@ -9,15 +9,13 @@ export default async function PublicLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [services, footerContent, contactInfo] = await Promise.all([
-    prisma.service.findMany({
-      where: { isVisible: true },
-      orderBy: { sortOrder: "asc" },
-      select: { title: true, slug: true },
-    }),
-    prisma.footerContent.findFirst(),
-    prisma.contactInfo.findFirst(),
-  ]);
+  const services = await prisma.service.findMany({
+    where: { isVisible: true },
+    orderBy: { sortOrder: "asc" },
+    select: { title: true, slug: true },
+  });
+  const footerContent = await prisma.footerContent.findFirst();
+  const contactInfo = await prisma.contactInfo.findFirst();
 
   return (
     <>
