@@ -1,0 +1,222 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model HeroSection {
+  id               String  @id @default(cuid())
+  videoUrl         String?
+  imageUrl         String?
+  heading          String  @default("GROUND PROS INC.")
+  subheading       String  @default("Chicagoland's Premier Commercial Landscape Partner")
+  tagline          String  @default("25+ Years of Landscaping Excellence")
+  ctaPrimaryText   String  @default("Request a Consultation")
+  ctaPrimaryLink   String  @default("#contact")
+  ctaSecondaryText String  @default("Our Services")
+  ctaSecondaryLink String  @default("#services")
+  isVisible        Boolean @default(true)
+  updatedAt        DateTime @updatedAt
+}
+
+model StatItem {
+  id        String   @id @default(cuid())
+  number    String
+  label     String
+  sortOrder Int      @default(0)
+  isVisible Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id         String   @id @default(cuid())
+  title      String
+  slug       String   @unique
+  shortDesc  String
+  fullDesc   String?
+  iconName   String?
+  imageUrl   String?
+  bgImageUrl String?
+  features   Json?
+  sortOrder  Int      @default(0)
+  isVisible  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model AboutSection {
+  id        String   @id @default(cuid())
+  heading   String   @default("Why Chicagoland Trusts Ground Pros")
+  bodyText  String
+  bullets   Json
+  images    Json
+  isVisible Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  description String?
+  beforeImage String?
+  afterImage  String?
+  images      Json?
+  clientName  String?
+  clientType  String?
+  isFeatured  Boolean  @default(false)
+  isVisible   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  quote       String
+  clientName  String
+  clientTitle String?
+  company     String?
+  rating      Int      @default(5)
+  isVisible   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Affiliation {
+  id        String   @id @default(cuid())
+  name      String
+  logoUrl   String
+  website   String?
+  sortOrder Int      @default(0)
+  isVisible Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+}
+
+model CtaBanner {
+  id         String   @id @default(cuid())
+  heading    String   @default("Ready to Transform Your Property?")
+  subtext    String   @default("Get a free consultation and custom landscape management proposal")
+  buttonText String   @default("Get Your Free Quote")
+  buttonLink String   @default("#contact")
+  bgImageUrl String?
+  isVisible  Boolean  @default(true)
+  updatedAt  DateTime @updatedAt
+}
+
+model ContactInfo {
+  id                String   @id @default(cuid())
+  address           String   @default("1470 Industrial Dr, Itasca, IL 60143")
+  phone             String   @default("(630) 993-1400")
+  fax               String?  @default("(630) 993-1430")
+  email             String   @default("info@groundpros.com")
+  businessHours     Json
+  socialLinks       Json
+  mapEmbedUrl       String?
+  notificationEmail String   @default("info@groundpros.com")
+  updatedAt         DateTime @updatedAt
+}
+
+model FooterContent {
+  id             String   @id @default(cuid())
+  description    String
+  quickLinks     Json
+  copyright      String   @default("© 2025 Ground Pros Inc. All rights reserved.")
+  showNewsletter Boolean  @default(true)
+  updatedAt      DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id              String   @id @default(cuid())
+  name            String
+  email           String
+  phone           String?
+  company         String?
+  serviceInterest String?
+  propertyType    String?
+  message         String
+  status          String   @default("new")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model JobPosting {
+  id           String           @id @default(cuid())
+  title        String
+  department   String?
+  location     String           @default("Itasca, IL")
+  type         String           @default("Full-time")
+  description  String
+  requirements Json?
+  isActive     Boolean          @default(true)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  applications JobApplication[]
+}
+
+model JobApplication {
+  id          String     @id @default(cuid())
+  jobId       String
+  name        String
+  email       String
+  phone       String?
+  resumeUrl   String?
+  coverLetter String?
+  status      String     @default("new")
+  createdAt   DateTime   @default(now())
+  job         JobPosting @relation(fields: [jobId], references: [id])
+}
+
+model SeoSettings {
+  id         String   @id @default(cuid())
+  page       String   @unique
+  metaTitle  String?
+  metaDesc   String?
+  ogImageUrl String?
+  updatedAt  DateTime @updatedAt
+}
+
+model MediaFile {
+  id        String   @id @default(cuid())
+  fileName  String
+  fileUrl   String
+  fileType  String
+  fileSize  Int?
+  altText   String?
+  category  String?
+  createdAt DateTime @default(now())
+}
+
+model GeneralSettings {
+  id             String   @id @default(cuid())
+  siteName       String   @default("Ground Pros Inc.")
+  siteTagline    String   @default("Landscaping Excellence, Creative Solutions, Quality Craftsmanship")
+  logoUrl        String?
+  faviconUrl     String?
+  analyticsId    String?
+  primaryColor   String   @default("#2d5016")
+  secondaryColor String   @default("#3a5a1c")
+  accentColor    String   @default("#8fbc4a")
+  updatedAt      DateTime @updatedAt
+}
