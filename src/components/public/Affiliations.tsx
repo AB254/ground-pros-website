@@ -1,10 +1,14 @@
 'use client';
 
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Affiliation {
   name: string;
   logoUrl: string;
+  website?: string | null;
 }
 
 interface AffiliationsProps {
@@ -18,44 +22,51 @@ export default function Affiliations({
   affiliations,
   className,
 }: AffiliationsProps) {
-  // Duplicate for seamless loop
-  const items = [...affiliations, ...affiliations];
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section className={cn('overflow-hidden bg-white py-16', className)}>
-      {heading && (
-        <h2 className="mb-10 text-center font-serif text-2xl font-bold text-forest sm:text-3xl">
-          {heading}
-        </h2>
-      )}
+    <section ref={ref} className={cn('bg-white py-20', className)}>
+      <div className="mx-auto max-w-6xl px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <span className="inline-block font-mono text-sm uppercase tracking-[0.2em] text-pine mb-3">
+            Our Partners
+          </span>
+          <h2 className="font-serif text-3xl font-bold text-forest sm:text-4xl">
+            {heading}
+          </h2>
+        </motion.div>
 
-      <div className="relative">
-        {/* Fade edges */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-white to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-white to-transparent" />
-
-        <div className="flex animate-[marquee_30s_linear_infinite] items-center gap-16">
-          {items.map((a, i) => (
-            <img
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {affiliations.map((a, i) => (
+            <motion.div
               key={`${a.name}-${i}`}
-              src={a.logoUrl}
-              alt={a.name}
-              className={cn(
-                'h-12 w-auto shrink-0 object-contain grayscale opacity-60',
-                'transition-all duration-300 hover:grayscale-0 hover:opacity-100'
-              )}
-            />
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : undefined}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <a
+                href={a.website || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center bg-cream rounded-2xl p-8 h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <div className="w-16 h-16 bg-sage/15 rounded-full flex items-center justify-center mb-4 group-hover:bg-pine group-hover:text-white transition-all duration-300">
+                  <Award className="w-8 h-8 text-pine group-hover:text-white transition-colors" />
+                </div>
+                <p className="text-sm font-semibold text-charcoal text-center leading-snug">
+                  {a.name}
+                </p>
+              </a>
+            </motion.div>
           ))}
         </div>
       </div>
-
-      {/* Marquee keyframes via inline style */}
-      <style>{`
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-      `}</style>
     </section>
   );
 }

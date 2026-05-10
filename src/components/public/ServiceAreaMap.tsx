@@ -31,60 +31,65 @@ export default function ServiceAreaMap({
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section ref={ref} className={cn('bg-sand py-20', className)}>
+    <section ref={ref} className={cn('bg-sand py-24', className)}>
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          {/* Text */}
+        <div className="grid items-center gap-16 lg:grid-cols-2">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : undefined}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h2 className="mb-4 font-serif text-3xl font-bold text-forest sm:text-4xl">
+            <span className="inline-block font-mono text-sm uppercase tracking-[0.2em] text-pine mb-4">
+              Coverage Area
+            </span>
+            <h2 className="mb-5 font-serif text-3xl font-bold text-forest sm:text-4xl lg:text-5xl">
               {heading}
             </h2>
-            <p className="mb-8 leading-relaxed text-slate">{description}</p>
-            <div className="grid grid-cols-2 gap-3">
+            <p className="mb-8 text-lg leading-relaxed text-slate">{description}</p>
+            <div className="grid grid-cols-2 gap-4">
               {areas.map((area, i) => (
                 <motion.div
                   key={area}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={isInView ? { opacity: 1, y: 0 } : undefined}
-                  transition={{ duration: 0.3, delay: 0.3 + i * 0.08 }}
-                  className="flex items-center gap-2"
+                  transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+                  className="flex items-center gap-3 bg-white rounded-xl p-3 shadow-sm"
                 >
-                  <MapPin className="h-4 w-4 shrink-0 text-moss" />
-                  <span className="text-sm text-charcoal">{area}</span>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sage/15">
+                    <MapPin className="h-4 w-4 text-pine" />
+                  </div>
+                  <span className="text-sm font-medium text-charcoal">{area}</span>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Map */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : undefined}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="overflow-hidden rounded-2xl shadow-lg"
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden rounded-2xl shadow-xl"
           >
             {embedUrl ? (
               <iframe
                 src={embedUrl}
-                className="h-[400px] w-full border-0"
+                className="h-[450px] w-full border-0"
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Service area map"
               />
             ) : (
-              <div className="flex h-[400px] items-center justify-center bg-stone/20">
-                <div className="text-center">
-                  <MapPin className="mx-auto mb-3 h-12 w-12 text-moss/40" />
-                  <p className="text-sm text-slate">
-                    Google Maps embed will appear here
-                  </p>
-                  <p className="mt-1 text-xs text-stone">
-                    Provide an embedUrl prop to display the map
+              <div className="flex h-[450px] items-center justify-center bg-gradient-to-br from-forest/5 to-pine/10">
+                <div className="text-center px-8">
+                  <div className="w-20 h-20 bg-sage/15 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MapPin className="h-10 w-10 text-pine" />
+                  </div>
+                  <h3 className="font-serif text-xl font-bold text-forest mb-2">
+                    Chicagoland Area
+                  </h3>
+                  <p className="text-slate">
+                    Serving commercial properties across the greater Chicago metropolitan area
                   </p>
                 </div>
               </div>

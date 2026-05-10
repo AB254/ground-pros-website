@@ -17,7 +17,7 @@ export default function CtaBanner({
   heading,
   subtext,
   buttonText = 'Contact Us Today',
-  buttonLink = '#contact',
+  buttonLink = '/contact',
   bgImageUrl,
   className,
 }: CtaBannerProps) {
@@ -27,48 +27,44 @@ export default function CtaBanner({
   return (
     <section
       ref={ref}
-      className={cn('relative overflow-hidden py-24', className)}
+      className={cn('relative overflow-hidden py-28', className)}
     >
-      {/* Background with parallax-style fixed attachment */}
       <div
         className="absolute inset-0 bg-cover bg-fixed bg-center bg-no-repeat"
-        style={bgImageUrl ? { backgroundImage: `url(${bgImageUrl})` } : undefined}
+        style={
+          bgImageUrl
+            ? { backgroundImage: `url(${bgImageUrl})` }
+            : { backgroundImage: "url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1600&q=80')" }
+        }
       />
-      <div className="absolute inset-0 bg-forest/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-forest/90 to-pine/85" />
 
-      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 0.5 }}
-          className="mb-4 font-serif text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
+      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : undefined}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          {heading}
-        </motion.h2>
+          <h2 className="mb-5 font-serif text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+            {heading}
+          </h2>
 
-        {subtext && (
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : undefined}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mb-8 text-lg text-white/80"
-          >
-            {subtext}
-          </motion.p>
-        )}
-
-        <motion.a
-          href={buttonLink}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className={cn(
-            'inline-block rounded-full bg-sage px-8 py-4 font-semibold text-white',
-            'transition-all duration-300 hover:bg-moss hover:shadow-lg hover:shadow-sage/25'
+          {subtext && (
+            <p className="mb-10 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed lg:text-xl">
+              {subtext}
+            </p>
           )}
-        >
-          {buttonText}
-        </motion.a>
+
+          <a
+            href={buttonLink}
+            className={cn(
+              'inline-block rounded-full bg-white text-pine px-10 py-4 text-lg font-semibold shadow-xl',
+              'transition-all duration-300 hover:bg-sage hover:text-white hover:shadow-2xl hover:scale-105'
+            )}
+          >
+            {buttonText}
+          </a>
+        </motion.div>
       </div>
     </section>
   );

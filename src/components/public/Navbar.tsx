@@ -47,14 +47,14 @@ export default function Navbar({ links = defaultLinks }: NavbarProps) {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           scrolled
-            ? 'bg-forest/95 shadow-lg backdrop-blur-md'
-            : 'bg-transparent'
+            ? 'bg-forest shadow-xl backdrop-blur-md border-b border-white/10'
+            : 'bg-gradient-to-b from-black/40 to-transparent'
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2">
-            <span className="font-serif text-xl font-bold tracking-wider text-white">
+            <span className="font-serif text-2xl font-bold tracking-wider text-white drop-shadow-md lg:text-3xl">
               GROUND PROS
             </span>
           </a>
@@ -66,7 +66,7 @@ export default function Navbar({ links = defaultLinks }: NavbarProps) {
                 <a
                   href={link.href}
                   className={cn(
-                    'relative text-sm font-medium tracking-wide text-white/90 transition-colors',
+                    'relative text-base font-semibold tracking-wide text-white drop-shadow-sm transition-colors lg:text-lg',
                     'hover:text-sage',
                     'after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0',
                     'after:bg-sage after:transition-all after:duration-300 hover:after:w-full'
@@ -80,10 +80,10 @@ export default function Navbar({ links = defaultLinks }: NavbarProps) {
 
           {/* CTA button (desktop) */}
           <a
-            href="#contact"
+            href="/contact"
             className={cn(
-              'hidden rounded-full bg-sage px-5 py-2 text-sm font-semibold text-white',
-              'transition-all duration-300 hover:bg-moss md:inline-block'
+              'hidden rounded-full bg-sage px-6 py-2.5 text-base font-semibold text-white shadow-lg',
+              'transition-all duration-300 hover:bg-moss hover:shadow-xl hover:scale-105 md:inline-block'
             )}
           >
             Get a Quote

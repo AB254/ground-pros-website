@@ -35,17 +35,21 @@ export default function Testimonials({
   return (
     <section
       ref={ref}
-      className={cn('bg-charcoal py-20 text-white', className)}
+      className={cn('relative bg-charcoal py-24 text-white overflow-hidden', className)}
     >
-      <div className="mx-auto max-w-5xl px-6">
-        <motion.h2
+      <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal to-forest/20" />
+      <div className="relative mx-auto max-w-5xl px-6">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center font-serif text-3xl font-bold sm:text-4xl"
+          className="text-center mb-14"
         >
-          {heading}
-        </motion.h2>
+          <span className="inline-block font-mono text-sm uppercase tracking-[0.2em] text-sage mb-4">
+            Testimonials
+          </span>
+          <h2 className="font-serif text-4xl font-bold sm:text-5xl">{heading}</h2>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -58,19 +62,18 @@ export default function Testimonials({
             pagination={{ clickable: true }}
             loop={testimonials.length > 1}
             spaceBetween={40}
-            className="pb-12"
+            className="pb-14"
           >
             {testimonials.map((t, i) => (
               <SwiperSlide key={i}>
-                <div className="flex flex-col items-center text-center">
-                  <Quote className="mb-6 h-10 w-10 text-sage/40" />
-                  <blockquote className="mb-8 max-w-3xl font-serif text-xl leading-relaxed italic text-white/90 sm:text-2xl">
+                <div className="flex flex-col items-center text-center px-4">
+                  <Quote className="mb-8 h-12 w-12 text-sage/30" />
+                  <blockquote className="mb-10 max-w-3xl font-serif text-xl leading-relaxed italic text-white/90 sm:text-2xl lg:text-3xl">
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
 
-                  {/* Stars */}
                   {t.rating && (
-                    <div className="mb-4 flex gap-1">
+                    <div className="mb-5 flex gap-1.5">
                       {Array.from({ length: 5 }).map((_, si) => (
                         <Star
                           key={si}
@@ -85,10 +88,11 @@ export default function Testimonials({
                     </div>
                   )}
 
-                  <p className="font-semibold text-sage">{t.clientName}</p>
+                  <div className="h-0.5 w-12 bg-sage/30 rounded-full mb-5" />
+                  <p className="font-semibold text-lg text-sage">{t.clientName}</p>
                   {(t.clientTitle || t.company) && (
                     <p className="mt-1 text-sm text-white/50">
-                      {[t.clientTitle, t.company].filter(Boolean).join(', ')}
+                      {[t.clientTitle, t.company].filter(Boolean).join(' — ')}
                     </p>
                   )}
                 </div>

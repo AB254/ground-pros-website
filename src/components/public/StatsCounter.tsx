@@ -46,7 +46,7 @@ function AnimatedStat({ value, inView }: { value: string; inView: boolean }) {
   }, [inView, numericPart, isAnimatable]);
 
   return (
-    <span className="font-mono text-4xl font-bold text-white sm:text-5xl">
+    <span className="font-mono text-5xl font-bold text-white sm:text-6xl">
       {isAnimatable ? count.toLocaleString() : ''}
       {suffix}
     </span>
@@ -58,18 +58,20 @@ export default function StatsCounter({ stats, className }: StatsCounterProps) {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} id="stats" className={cn('bg-forest py-16', className)}>
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 md:grid-cols-4">
+    <section ref={ref} id="stats" className={cn('relative bg-forest py-20 overflow-hidden', className)}>
+      <div className="absolute inset-0 bg-gradient-to-r from-forest via-pine/30 to-forest opacity-50" />
+      <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-10 px-6 md:grid-cols-4">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : undefined}
-            transition={{ duration: 0.5, delay: i * 0.15 }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : undefined}
+            transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="text-center"
           >
             <AnimatedStat value={stat.number} inView={isInView} />
-            <p className="mt-2 text-sm font-medium uppercase tracking-wider text-sage/80">
+            <div className="mt-1 h-0.5 w-12 bg-sage/40 mx-auto rounded-full" />
+            <p className="mt-3 text-sm font-semibold uppercase tracking-[0.15em] text-sage/80">
               {stat.label}
             </p>
           </motion.div>

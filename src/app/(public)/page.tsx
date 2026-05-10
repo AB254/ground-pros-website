@@ -13,18 +13,23 @@ import ContactSection from "@/components/public/ContactSection";
 import ServiceAreaMap from "@/components/public/ServiceAreaMap";
 
 export default async function HomePage() {
-  const [hero, stats, services, about, projects, testimonials, affiliations, cta, contactInfo] =
-    await Promise.all([
-      prisma.heroSection.findFirst(),
-      prisma.statItem.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
-      prisma.service.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
-      prisma.aboutSection.findFirst(),
-      prisma.project.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
-      prisma.testimonial.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
-      prisma.affiliation.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
-      prisma.ctaBanner.findFirst(),
-      prisma.contactInfo.findFirst(),
-    ]);
+  const [hero, stats, services, about] = await Promise.all([
+    prisma.heroSection.findFirst(),
+    prisma.statItem.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
+    prisma.service.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
+    prisma.aboutSection.findFirst(),
+  ]);
+
+  const [projects, testimonials, affiliations] = await Promise.all([
+    prisma.project.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
+    prisma.testimonial.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
+    prisma.affiliation.findMany({ where: { isVisible: true }, orderBy: { sortOrder: "asc" } }),
+  ]);
+
+  const [cta, contactInfo] = await Promise.all([
+    prisma.ctaBanner.findFirst(),
+    prisma.contactInfo.findFirst(),
+  ]);
 
   return (
     <>
