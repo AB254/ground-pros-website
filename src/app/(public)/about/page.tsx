@@ -37,7 +37,7 @@ export default async function AboutPage() {
   const bullets = (about?.bullets as { icon: string; text: string }[]) ?? [];
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       {/* Hero Banner */}
       <section className="relative bg-black text-white pt-40 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.groundpros.com/wp-content/uploads/2018/04/Gp-Headers-About-Us.jpg')] bg-cover bg-center" />
@@ -104,7 +104,7 @@ export default async function AboutPage() {
                   <p className="text-3xl font-mono font-bold">25+</p>
                   <p className="text-xs uppercase tracking-wider text-sage mt-1">Years of Excellence</p>
                 </div>
-                <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl border-2 border-sage/30" />
+                <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl border-2 border-sage/30 hidden md:block" />
               </div>
             </ScrollReveal>
           </div>

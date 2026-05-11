@@ -29,7 +29,7 @@ export default async function PublicLayout({
           { label: "Contact", href: "/contact" },
         ]}
       />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 overflow-x-hidden">{children}</main>
       <Footer
         description={footerContent?.description ?? ""}
         quickLinks={(footerContent?.quickLinks as { label: string; url: string }[]) ?? []}
