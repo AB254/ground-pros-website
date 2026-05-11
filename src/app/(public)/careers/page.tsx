@@ -7,11 +7,15 @@ import { MapPin, Clock, Briefcase, Send, Heart, TrendingUp, Shield, Users } from
 import CareerApplicationForm from "@/components/public/CareerApplicationForm";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await prisma.seoSettings.findUnique({ where: { page: "careers" } });
-  return {
-    title: seo?.metaTitle ?? "Careers | Ground Pros Inc.",
-    description: seo?.metaDesc ?? "Join our team of landscape professionals.",
-  };
+  try {
+    const seo = await prisma.seoSettings.findUnique({ where: { page: "careers" } });
+    return {
+      title: seo?.metaTitle ?? "Careers | Ground Pros Inc.",
+      description: seo?.metaDesc ?? "Join our team of landscape professionals.",
+    };
+  } catch {
+    return { title: "Careers | Ground Pros Inc.", description: "Join our team of landscape professionals." };
+  }
 }
 
 export default async function CareersPage() {

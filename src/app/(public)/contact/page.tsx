@@ -7,11 +7,15 @@ import ContactSection from "@/components/public/ContactSection";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await prisma.seoSettings.findUnique({ where: { page: "contact" } });
-  return {
-    title: seo?.metaTitle ?? "Contact Us | Ground Pros Inc.",
-    description: seo?.metaDesc ?? "Get in touch with Ground Pros Inc.",
-  };
+  try {
+    const seo = await prisma.seoSettings.findUnique({ where: { page: "contact" } });
+    return {
+      title: seo?.metaTitle ?? "Contact Us | Ground Pros Inc.",
+      description: seo?.metaDesc ?? "Get in touch with Ground Pros Inc.",
+    };
+  } catch {
+    return { title: "Contact Us | Ground Pros Inc.", description: "Get in touch with Ground Pros Inc." };
+  }
 }
 
 export default async function ContactPage() {

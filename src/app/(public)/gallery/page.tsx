@@ -7,11 +7,15 @@ import ProjectGallery from "@/components/public/ProjectGallery";
 import { Camera } from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await prisma.seoSettings.findUnique({ where: { page: "gallery" } });
-  return {
-    title: seo?.metaTitle ?? "Project Gallery | Ground Pros Inc.",
-    description: seo?.metaDesc ?? "View our portfolio of commercial landscape projects.",
-  };
+  try {
+    const seo = await prisma.seoSettings.findUnique({ where: { page: "gallery" } });
+    return {
+      title: seo?.metaTitle ?? "Project Gallery | Ground Pros Inc.",
+      description: seo?.metaDesc ?? "View our portfolio of commercial landscape projects.",
+    };
+  } catch {
+    return { title: "Project Gallery | Ground Pros Inc.", description: "View our portfolio of commercial landscape projects." };
+  }
 }
 
 export default async function GalleryPage() {

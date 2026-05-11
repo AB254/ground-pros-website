@@ -16,11 +16,15 @@ import {
 } from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await prisma.seoSettings.findUnique({ where: { page: "services" } });
-  return {
-    title: seo?.metaTitle ?? "Our Services | Ground Pros Inc.",
-    description: seo?.metaDesc ?? "Commercial landscaping services.",
-  };
+  try {
+    const seo = await prisma.seoSettings.findUnique({ where: { page: "services" } });
+    return {
+      title: seo?.metaTitle ?? "Our Services | Ground Pros Inc.",
+      description: seo?.metaDesc ?? "Commercial landscaping services.",
+    };
+  } catch {
+    return { title: "Our Services | Ground Pros Inc.", description: "Commercial landscaping services." };
+  }
 }
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {

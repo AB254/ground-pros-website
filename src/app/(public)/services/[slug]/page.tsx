@@ -21,13 +21,17 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const service = await prisma.service.findUnique({ where: { slug } });
-  if (!service) return { title: "Service Not Found" };
-  return {
-    title: `${service.title} | Ground Pros Inc.`,
-    description: service.shortDesc,
-  };
+  try {
+    const { slug } = await params;
+    const service = await prisma.service.findUnique({ where: { slug } });
+    if (!service) return { title: "Service Not Found" };
+    return {
+      title: `${service.title} | Ground Pros Inc.`,
+      description: service.shortDesc,
+    };
+  } catch {
+    return { title: "Our Services | Ground Pros Inc.", description: "Commercial landscaping services." };
+  }
 }
 
 export async function generateStaticParams() {

@@ -6,11 +6,15 @@ import ScrollReveal from "@/components/public/ScrollReveal";
 import { Award, Shield, Clock, Leaf, Users, Target, Heart, Star, CheckCircle } from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await prisma.seoSettings.findUnique({ where: { page: "about" } });
-  return {
-    title: seo?.metaTitle ?? "About Ground Pros Inc.",
-    description: seo?.metaDesc ?? "Learn about Ground Pros Inc.",
-  };
+  try {
+    const seo = await prisma.seoSettings.findUnique({ where: { page: "about" } });
+    return {
+      title: seo?.metaTitle ?? "About Ground Pros Inc.",
+      description: seo?.metaDesc ?? "Learn about Ground Pros Inc.",
+    };
+  } catch {
+    return { title: "About Ground Pros Inc.", description: "Learn about Ground Pros Inc." };
+  }
 }
 
 const iconMap: Record<string, React.ReactNode> = {
