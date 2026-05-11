@@ -25,23 +25,28 @@ export default async function HomePage() {
 
   return (
     <>
-      {hero?.isVisible !== false && (
-        <HeroSection
-          heading={hero?.heading ?? "GROUND PROS INC."}
-          subheading={hero?.subheading ?? "Chicagoland's Premier Commercial Landscape Partner"}
-          tagline={hero?.tagline ?? "25+ Years of Landscaping Excellence"}
-          ctaPrimaryText={hero?.ctaPrimaryText ?? "Request a Consultation"}
-          ctaPrimaryLink={hero?.ctaPrimaryLink ?? "#contact"}
-          ctaSecondaryText={hero?.ctaSecondaryText ?? "Our Services"}
-          ctaSecondaryLink={hero?.ctaSecondaryLink ?? "#services"}
-          imageUrl={hero?.imageUrl}
-          videoUrl={hero?.videoUrl}
-        />
-      )}
+      <div
+        className="relative bg-cover bg-fixed bg-center bg-no-repeat bg-black"
+        style={hero?.imageUrl ? { backgroundImage: `url(${hero.imageUrl})` } : { backgroundImage: "url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1600&q=80')" }}
+      >
+        {hero?.isVisible !== false && (
+          <HeroSection
+            heading={hero?.heading ?? "GROUND PROS INC."}
+            subheading={hero?.subheading ?? "Chicagoland's Premier Commercial Landscape Partner"}
+            tagline={hero?.tagline ?? "25+ Years of Landscaping Excellence"}
+            ctaPrimaryText={hero?.ctaPrimaryText ?? "Request a Consultation"}
+            ctaPrimaryLink={hero?.ctaPrimaryLink ?? "#contact"}
+            ctaSecondaryText={hero?.ctaSecondaryText ?? "Our Services"}
+            ctaSecondaryLink={hero?.ctaSecondaryLink ?? "#services"}
+            imageUrl={hero?.imageUrl}
+            videoUrl={hero?.videoUrl}
+          />
+        )}
 
-      {stats.length > 0 && (
-        <StatsCounter stats={stats.map((s) => ({ number: s.number, label: s.label }))} />
-      )}
+        {stats.length > 0 && (
+          <StatsCounter stats={stats.map((s) => ({ number: s.number, label: s.label }))} />
+        )}
+      </div>
 
       {services.length > 0 && (
         <section id="services">
@@ -112,7 +117,7 @@ export default async function HomePage() {
         />
       )}
 
-      <ServiceAreaMap />
+      <ServiceAreaMap embedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d380511.5765498485!2d-88.24247704999999!3d41.8336479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e5761e1d3ddbb%3A0x5ee76a25e4183586!2sGround%20Pros%20Inc.!5e0!3m2!1sen!2sus!4v1715000000000!5m2!1sen!2sus" />
 
       <section id="contact">
         <ContactSection

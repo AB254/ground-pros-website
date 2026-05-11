@@ -8,7 +8,7 @@ import { TopBar } from "@/components/admin/TopBar";
 import { ToastProvider } from "@/components/admin/Toast";
 
 function AdminShell({ children }: { children: React.ReactNode }) {
-  const { status } = useSession();
+  const { data: session, status } = useSession();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -31,9 +31,11 @@ function AdminShell({ children }: { children: React.ReactNode }) {
     return <>{children}</>;
   }
 
+  const userRole = (session?.user as { role?: string })?.role ?? "admin";
+
   return (
     <div className="flex h-screen overflow-hidden bg-cream">
-      <Sidebar />
+      <Sidebar role={userRole} />
       <div className="flex flex-1 flex-col overflow-hidden">
         <TopBar />
         <main className="flex-1 overflow-y-auto p-6">{children}</main>

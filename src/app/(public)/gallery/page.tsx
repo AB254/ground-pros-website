@@ -25,10 +25,10 @@ export default async function GalleryPage() {
   });
 
   return (
-    <div className="pt-24">
-      <section className="relative bg-forest text-white py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1600&q=80')] bg-cover bg-center opacity-15" />
-        <div className="absolute inset-0 bg-gradient-to-b from-forest/80 to-forest" />
+    <div>
+      <section className="relative bg-black text-white pt-40 pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.groundpros.com/wp-content/uploads/2019/05/7-English-Garden.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative max-w-6xl mx-auto px-6 text-center">
           <ScrollReveal>
             <span className="inline-block font-mono text-sm uppercase tracking-[0.2em] text-sage mb-4">

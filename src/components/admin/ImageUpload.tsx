@@ -2,29 +2,44 @@
 
 import React, { useState, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { Upload, X, ImageIcon } from "lucide-react";
+import { Upload, X, Loader2 } from "lucide-react";
 
 interface ImageUploadProps {
-  onUpload: (dataUrl: string) => void;
+  onUpload: (url: string) => void;
   currentImage?: string;
   className?: string;
+  label?: string;
 }
 
-export function ImageUpload({ onUpload, currentImage, className }: ImageUploadProps) {
+export function ImageUpload({ onUpload, currentImage, className, label }: ImageUploadProps) {
   const [preview, setPreview] = useState<string | null>(currentImage || null);
   const [isDragging, setIsDragging] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleFile = useCallback(
-    (file: File) => {
+  const uploadFile = useCallback(
+    async (file: File) => {
       if (!file.type.startsWith("image/")) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        const result = reader.result as string;
-        setPreview(result);
-        onUpload(result);
-      };
-      reader.readAsDataURL(file);
+      if (file.size > 10 * 1024 * 1024) return;
+
+      const localPreview = URL.createObjectURL(file);
+      setPreview(localPreview);
+      setUploading(true);
+
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await fetch("/api/upload", { method: "POST", body: formData });
+        if (!res.ok) throw new Error("Upload failed");
+        const { url } = await res.json();
+        setPreview(url);
+        onUpload(url);
+      } catch {
+        setPreview(null);
+        onUpload("");
+      } finally {
+        setUploading(false);
+      }
     },
     [onUpload]
   );
@@ -34,14 +49,14 @@ export function ImageUpload({ onUpload, currentImage, className }: ImageUploadPr
       e.preventDefault();
       setIsDragging(false);
       const file = e.dataTransfer.files[0];
-      if (file) handleFile(file);
+      if (file) uploadFile(file);
     },
-    [handleFile]
+    [uploadFile]
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) handleFile(file);
+    if (file) uploadFile(file);
   };
 
   const clear = () => {
@@ -52,6 +67,9 @@ export function ImageUpload({ onUpload, currentImage, className }: ImageUploadPr
 
   return (
     <div className={cn("space-y-2", className)}>
+      {label && (
+        <label className="block text-sm font-medium text-charcoal">{label}</label>
+      )}
       {preview ? (
         <div className="relative group rounded-lg overflow-hidden border border-stone/20">
           <img
@@ -59,13 +77,20 @@ export function ImageUpload({ onUpload, currentImage, className }: ImageUploadPr
             alt="Preview"
             className="w-full h-48 object-cover"
           />
-          <button
-            type="button"
-            onClick={clear}
-            className="absolute top-2 right-2 rounded-full bg-black/60 p-1 text-white opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <X className="h-4 w-4" />
-          </button>
+          {uploading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+              <Loader2 className="h-8 w-8 text-white animate-spin" />
+            </div>
+          )}
+          {!uploading && (
+            <button
+              type="button"
+              onClick={clear}
+              className="absolute top-2 right-2 rounded-full bg-black/60 p-1 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
         </div>
       ) : (
         <div
@@ -89,7 +114,7 @@ export function ImageUpload({ onUpload, currentImage, className }: ImageUploadPr
           <p className="text-sm text-slate">
             Drag and drop or click to upload
           </p>
-          <p className="text-xs text-stone">PNG, JPG, WebP up to 5MB</p>
+          <p className="text-xs text-stone">PNG, JPG, WebP up to 10MB</p>
         </div>
       )}
       <input

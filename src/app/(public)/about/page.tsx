@@ -37,11 +37,11 @@ export default async function AboutPage() {
   const bullets = (about?.bullets as { icon: string; text: string }[]) ?? [];
 
   return (
-    <div className="pt-24">
+    <div>
       {/* Hero Banner */}
-      <section className="relative bg-forest text-white py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1600&q=80')] bg-cover bg-center opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-forest/80 to-forest" />
+      <section className="relative bg-black text-white pt-40 pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.groundpros.com/wp-content/uploads/2018/04/Gp-Headers-About-Us.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative max-w-6xl mx-auto px-6 text-center">
           <ScrollReveal>
             <span className="inline-block font-mono text-sm uppercase tracking-[0.2em] text-sage mb-4">
@@ -91,17 +91,18 @@ export default async function AboutPage() {
               </div>
             </ScrollReveal>
             <ScrollReveal direction="right" delay={0.2}>
-              <div className="relative">
-                <div className="bg-sand rounded-2xl p-8 aspect-square flex items-center justify-center overflow-hidden relative">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80')" }}
+              <div className="relative group">
+                <div className="overflow-hidden rounded-2xl shadow-xl">
+                  <img
+                    src="https://www.groundpros.com/wp-content/uploads/2014/07/About-Us-Mike-Gina-300x240.jpg"
+                    alt="Michael & Gina Pezza - Ground Pros Leadership"
+                    className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-forest/60" />
-                  <div className="relative text-center text-white">
-                    <p className="text-8xl font-mono font-bold">25+</p>
-                    <p className="text-xl mt-4 font-serif">Years of Excellence</p>
-                  </div>
+                </div>
+                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-forest text-white rounded-2xl px-6 py-4 shadow-xl text-center z-10">
+                  <p className="text-3xl font-mono font-bold">25+</p>
+                  <p className="text-xs uppercase tracking-wider text-sage mt-1">Years of Excellence</p>
                 </div>
                 <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl border-2 border-sage/30" />
               </div>
@@ -184,23 +185,41 @@ export default async function AboutPage() {
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             <ScrollReveal delay={0.1} direction="left">
-              <div className="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-shadow duration-300">
-                <div className="w-28 h-28 bg-gradient-to-br from-sage/30 to-pine/20 rounded-full mx-auto mb-5 flex items-center justify-center">
-                  <Users className="w-12 h-12 text-pine" />
+              <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 group">
+                <div className="overflow-hidden">
+                  <img
+                    src="https://www.groundpros.com/wp-content/uploads/2017/06/About-Us-Mike.jpg"
+                    alt="Michael Pezza"
+                    className="w-full aspect-[4/5] object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
                 </div>
-                <h3 className="text-xl font-serif font-bold text-forest">Mike Pezza, CLP</h3>
-                <p className="text-pine font-medium mt-1">President / CEO</p>
-                <p className="text-stone text-sm mt-3">mikep@groundpros.com</p>
+                <div className="p-6 text-center">
+                  <h3 className="text-xl font-serif font-bold text-forest">Michael Pezza, CLP</h3>
+                  <p className="text-pine font-medium mt-1">President & Founder</p>
+                  <p className="text-stone text-sm mt-3 leading-relaxed">
+                    Founded Ground Pros Inc. in 1992. Board of Directors member for ILCA, recognized Trailblazer by NALP, and Landscape Industry Certified Manager.
+                  </p>
+                </div>
               </div>
             </ScrollReveal>
             <ScrollReveal delay={0.2} direction="right">
-              <div className="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-shadow duration-300">
-                <div className="w-28 h-28 bg-gradient-to-br from-sage/30 to-pine/20 rounded-full mx-auto mb-5 flex items-center justify-center">
-                  <Users className="w-12 h-12 text-pine" />
+              <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 group">
+                <div className="overflow-hidden">
+                  <img
+                    src="https://www.groundpros.com/wp-content/uploads/2017/06/About-Us-Gina.jpg"
+                    alt="Gina Pezza"
+                    className="w-full aspect-[4/5] object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
                 </div>
-                <h3 className="text-xl font-serif font-bold text-forest">Philip Pezza</h3>
-                <p className="text-pine font-medium mt-1">President</p>
-                <p className="text-stone text-sm mt-3">philipp@groundpros.com</p>
+                <div className="p-6 text-center">
+                  <h3 className="text-xl font-serif font-bold text-forest">Gina Pezza</h3>
+                  <p className="text-pine font-medium mt-1">VP & Director of Sales</p>
+                  <p className="text-stone text-sm mt-3 leading-relaxed">
+                    Building trust and client relationships is the number one most important part of building a successful business. Active member of BOMA and CAI.
+                  </p>
+                </div>
               </div>
             </ScrollReveal>
           </div>
@@ -221,21 +240,134 @@ export default async function AboutPage() {
                 </h2>
               </div>
             </ScrollReveal>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="flex flex-wrap justify-center gap-8">
               {affiliations.map((a, i) => (
                 <ScrollReveal key={a.id} delay={i * 0.1} direction="scale">
-                  <div className="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    <div className="h-20 flex items-center justify-center mb-4">
-                      <Award className="w-14 h-14 text-pine" />
+                  <a
+                    href={a.website || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col items-center justify-center bg-white rounded-2xl p-8 w-52 h-52 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500"
+                  >
+                    <div className="w-24 h-24 mb-4 flex items-center justify-center">
+                      <img
+                        src={a.logoUrl}
+                        alt={a.name}
+                        className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
                     </div>
-                    <p className="text-sm font-semibold text-charcoal">{a.name}</p>
-                  </div>
+                    <p className="text-xs font-semibold text-charcoal/70 text-center leading-snug group-hover:text-pine transition-colors">{a.name}</p>
+                  </a>
                 </ScrollReveal>
               ))}
             </div>
           </div>
         </section>
       )}
+
+      {/* GPI Gives Back */}
+      <section className="relative py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.groundpros.com/wp-content/uploads/2015/03/GPI-Gives-Back-Loaves-Fishes.jpg')] bg-cover bg-center bg-fixed" />
+        <div className="absolute inset-0 bg-black/75" />
+        <div className="relative max-w-6xl mx-auto px-6">
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <span className="inline-block font-mono text-sm uppercase tracking-[0.25em] text-sage mb-4">
+                Community
+              </span>
+              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
+                GPI Gives Back
+              </h2>
+              <div className="h-1 w-20 bg-gradient-to-r from-sage to-moss mx-auto rounded-full" />
+            </div>
+          </ScrollReveal>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <ScrollReveal direction="left">
+              <div>
+                <p className="text-white/90 text-lg leading-relaxed mb-6">
+                  At Ground Pros, we believe in leaving the world better than we found it. Each year, we select a new charity — targeting smaller, local organizations in the Chicagoland area — and rally our team through company-sponsored raffles, food drives, and volunteer hours.
+                </p>
+                <p className="text-white/70 leading-relaxed mb-8">
+                  Our commitment to community goes beyond landscaping. We are dedicated to creating an organization that through hard work and philanthropy makes a lasting positive impact on the communities we serve.
+                </p>
+
+                <div className="space-y-4">
+                  <ScrollReveal delay={0.1}>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:border-sage/30 transition-all duration-300">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-lg bg-sage/20 flex items-center justify-center flex-shrink-0 mt-1">
+                          <Heart className="w-5 h-5 text-sage" />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">Loaves and Fishes, Naperville IL</h4>
+                          <p className="text-white/60 text-sm mt-1">2017 — Packed 690 Nutrition Bags during our March volunteer event</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                  <ScrollReveal delay={0.2}>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:border-sage/30 transition-all duration-300">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-lg bg-sage/20 flex items-center justify-center flex-shrink-0 mt-1">
+                          <Heart className="w-5 h-5 text-sage" />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">Feed My Starving Children, Schaumburg IL</h4>
+                          <p className="text-white/60 text-sm mt-1">2016 — Packed 138 boxes totaling 29,808 meals and donated $1,552 to feed 19 children for a whole year</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal direction="right" delay={0.2}>
+              <div className="space-y-5">
+                <div className="overflow-hidden rounded-2xl shadow-xl group">
+                  <img
+                    src="https://www.groundpros.com/wp-content/uploads/2015/03/GPI-Gives-Back-Loaves-Fishes.jpg"
+                    alt="GPI Gives Back - Loaves and Fishes"
+                    className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-2xl shadow-xl group">
+                  <img
+                    src="https://www.groundpros.com/wp-content/uploads/2015/03/GPI-Give-Back-Feed-my-starving-children.jpg"
+                    alt="GPI Gives Back - Feed My Starving Children"
+                    className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          <ScrollReveal delay={0.3}>
+            <div className="mt-16 text-center">
+              <p className="text-white/50 text-sm uppercase tracking-wider mb-4">Past Charity Partners</p>
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-white/40 text-sm">
+                <span className="hover:text-sage transition-colors">The Peoples Resource Center</span>
+                <span>•</span>
+                <span className="hover:text-sage transition-colors">Su Casa — A Shelter for Families</span>
+                <span>•</span>
+                <span className="hover:text-sage transition-colors">Hesed House</span>
+                <span>•</span>
+                <span className="hover:text-sage transition-colors">Nuestros Pequeños Hermanos</span>
+                <span>•</span>
+                <span className="hover:text-sage transition-colors">Friends of the Orphans</span>
+                <span>•</span>
+                <span className="hover:text-sage transition-colors">Bensenville-Wood Dale Food Pantry</span>
+                <span>•</span>
+                <span className="hover:text-sage transition-colors">Dominican Literacy Center</span>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="py-20 bg-pine text-white text-center">

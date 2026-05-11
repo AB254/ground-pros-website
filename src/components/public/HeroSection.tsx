@@ -32,7 +32,7 @@ export default function HeroSection({
   return (
     <section className="relative flex h-screen min-h-[700px] items-center justify-center overflow-hidden">
       {/* Background */}
-      {videoUrl ? (
+      {videoUrl && (
         <video
           autoPlay
           muted
@@ -42,26 +42,10 @@ export default function HeroSection({
         >
           <source src={videoUrl} type="video/mp4" />
         </video>
-      ) : (
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-forest"
-          style={imageUrl ? { backgroundImage: `url(${imageUrl})` } : undefined}
-        />
       )}
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-forest/80 via-forest/60 to-charcoal/80" />
-
-      {/* Decorative elements */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 2, delay: 1.5 }}
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'radial-gradient(circle at 25% 25%, rgba(143, 188, 74, 0.15) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(45, 80, 22, 0.1) 0%, transparent 50%)',
-        }}
-      />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/60 z-[1]" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">

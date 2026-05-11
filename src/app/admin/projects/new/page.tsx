@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Select";
 import { Toggle } from "@/components/ui/Toggle";
 import { useToast } from "@/components/admin/Toast";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 const categories = [
   { value: "commercial", label: "Commercial" },
@@ -62,8 +63,8 @@ export default function NewProjectPage() {
             <Select label="Category" options={categories} value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
             <Textarea label="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Input label="Before Image URL" value={form.beforeImage} onChange={(e) => setForm({ ...form, beforeImage: e.target.value })} />
-              <Input label="After Image URL" value={form.afterImage} onChange={(e) => setForm({ ...form, afterImage: e.target.value })} />
+              <ImageUpload label="Before Image" currentImage={form.beforeImage} onUpload={(url) => setForm({ ...form, beforeImage: url })} />
+              <ImageUpload label="After Image" currentImage={form.afterImage} onUpload={(url) => setForm({ ...form, afterImage: url })} />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Input label="Client Name" value={form.clientName} onChange={(e) => setForm({ ...form, clientName: e.target.value })} />

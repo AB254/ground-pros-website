@@ -37,7 +37,7 @@ export default function CtaBanner({
             : { backgroundImage: "url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1600&q=80')" }
         }
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-forest/90 to-pine/85" />
+      <div className="absolute inset-0 bg-black/65" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
         <motion.div

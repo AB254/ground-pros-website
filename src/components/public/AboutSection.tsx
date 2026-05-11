@@ -41,22 +41,34 @@ export default function AboutSection({
           className="relative"
         >
           {images.length > 0 ? (
-            <div className="relative overflow-hidden rounded-2xl shadow-xl">
-              <img
-                src={images[0]}
-                alt="About Ground Pros"
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
+            <div className="relative group">
+              <div className="overflow-hidden rounded-2xl shadow-xl">
+                <img
+                  src={images[0]}
+                  alt="Michael & Gina Pezza - Ground Pros Leadership"
+                  className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isInView ? { scale: 1, opacity: 1 } : undefined}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-forest text-white rounded-2xl px-6 py-4 shadow-xl text-center z-10"
+              >
+                <p className="text-3xl font-mono font-bold">25+</p>
+                <p className="text-xs uppercase tracking-wider text-sage mt-1">Years of Excellence</p>
+              </motion.div>
               <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl border-2 border-sage/30" />
             </div>
           ) : (
             <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-forest to-pine flex items-center justify-center overflow-hidden">
+              <div className="aspect-square rounded-2xl flex items-center justify-center overflow-hidden">
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-30"
-                  style={{ backgroundImage: "url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80')" }}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: "url('https://www.groundpros.com/wp-content/uploads/2020/05/intro_web.jpg')" }}
                 />
+                <div className="absolute inset-0 bg-black/60" />
                 <div className="relative text-center text-white">
                   <p className="text-8xl font-mono font-bold">25+</p>
                   <p className="text-xl mt-4 font-serif">Years of Excellence</p>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Leaf, ExternalLink, Globe } from 'lucide-react';
+import { ExternalLink, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface FooterProps {
@@ -57,8 +57,7 @@ export default function Footer({
           {/* Company */}
           <div>
             <div className="mb-4 flex items-center gap-2">
-              <Leaf className="h-5 w-5 text-sage" />
-              <span className="font-serif text-lg font-bold tracking-wider">GROUND PROS</span>
+              <img src="/logo.png" alt="Ground Pros" className="h-14 w-auto" />
             </div>
             <p className="text-sm leading-relaxed text-white/60 mb-6">
               {description || "Ground Pros Inc. — Chicagoland's premier commercial landscape partner."}
@@ -188,8 +187,8 @@ export default function Footer({
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-6 sm:flex-row">
           <p className="text-xs text-white/40">{copyright}</p>
           <div className="flex gap-6 text-xs text-white/40">
-            <a href="/privacy" className="hover:text-white/60">Privacy Policy</a>
-            <a href="/terms" className="hover:text-white/60">Terms of Service</a>
+            <Link href="/privacy" className="hover:text-white/60">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white/60">Terms of Service</Link>
           </div>
         </div>
       </div>

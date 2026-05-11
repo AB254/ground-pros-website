@@ -47,16 +47,14 @@ export default function Navbar({ links = defaultLinks }: NavbarProps) {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           scrolled
-            ? 'bg-forest shadow-xl backdrop-blur-md border-b border-white/10'
-            : 'bg-gradient-to-b from-black/40 to-transparent'
+            ? 'bg-black/90 shadow-xl backdrop-blur-md border-b border-white/10'
+            : 'bg-transparent'
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2">
-            <span className="font-serif text-2xl font-bold tracking-wider text-white drop-shadow-md lg:text-3xl">
-              GROUND PROS
-            </span>
+            <img src="/logo.png" alt="Ground Pros" className="h-10 w-auto lg:h-12" />
           </a>
 
           {/* Desktop links */}
@@ -116,7 +114,7 @@ export default function Navbar({ links = defaultLinks }: NavbarProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 z-50 flex h-full w-72 flex-col bg-forest p-8 shadow-2xl"
+              className="fixed top-0 right-0 z-50 flex h-full w-72 flex-col bg-black p-8 shadow-2xl"
             >
               <button
                 onClick={() => setMobileOpen(false)}

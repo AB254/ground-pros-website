@@ -25,7 +25,7 @@ import {
   Menu,
 } from "lucide-react";
 
-const navItems = [
+const allNavItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Hero Section", href: "/admin/hero", icon: Image },
   { label: "Stats", href: "/admin/stats", icon: BarChart3 },
@@ -44,10 +44,24 @@ const navItems = [
   { label: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
-export function Sidebar() {
+const editorNavHrefs = new Set([
+  "/admin",
+  "/admin/stats",
+  "/admin/services",
+  "/admin/projects",
+  "/admin/testimonials",
+  "/admin/careers",
+  "/admin/settings",
+]);
+
+export function Sidebar({ role = "admin" }: { role?: string }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navItems = role === "admin"
+    ? allNavItems
+    : allNavItems.filter((item) => editorNavHrefs.has(item.href));
 
   const isActive = (href: string) => {
     if (href === "/admin") return pathname === "/admin";

@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { Search } from 'lucide-react';
 import Lightbox from './Lightbox';
 
 interface ProjectItem {
@@ -49,32 +50,43 @@ export default function ProjectGallery({
   }));
 
   return (
-    <section ref={ref} id="gallery" className={cn('bg-cream py-20', className)}>
+    <section ref={ref} id="gallery" className={cn('bg-cream py-24', className)}>
       <div className="mx-auto max-w-7xl px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 0.5 }}
-          className="mb-4 text-center font-serif text-3xl font-bold text-forest sm:text-4xl"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-6"
         >
-          {heading}
-        </motion.h2>
+          <span className="inline-block font-mono text-sm uppercase tracking-[0.25em] text-pine mb-3">
+            Portfolio
+          </span>
+          <h2 className="font-serif text-3xl font-bold text-forest sm:text-4xl lg:text-5xl">
+            {heading}
+          </h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : undefined}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-5 h-1 w-20 bg-gradient-to-r from-sage to-moss mx-auto rounded-full origin-center"
+          />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-10 flex flex-wrap justify-center gap-2"
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mb-12 flex flex-wrap justify-center gap-3"
         >
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveFilter(cat)}
               className={cn(
-                'rounded-full px-5 py-2 text-sm font-medium transition-all duration-200',
+                'rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300',
                 activeFilter === cat
-                  ? 'bg-forest text-white'
-                  : 'bg-sand text-slate hover:bg-stone/20'
+                  ? 'bg-forest text-white shadow-lg shadow-forest/20 scale-105'
+                  : 'bg-white text-slate hover:bg-sand hover:text-forest hover:shadow-md'
               )}
             >
               {cat}
@@ -82,36 +94,47 @@ export default function ProjectGallery({
           ))}
         </motion.div>
 
-        <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+        <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, i) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.35, delay: i * 0.05 }}
-                className="mb-4 break-inside-avoid"
+                initial={{ opacity: 0, scale: 0.85, y: 30 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.85, y: -20 }}
+                transition={{
+                  duration: 0.5,
+                  delay: i * 0.06,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="mb-5 break-inside-avoid"
               >
                 <button
                   onClick={() => setLightboxIndex(i)}
-                  className="group relative w-full overflow-hidden rounded-xl"
+                  className="group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-2xl transition-shadow duration-500"
                 >
                   <img
                     src={getImageUrl(project)}
                     alt={project.title}
-                    className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-forest/0 transition-colors duration-300 group-hover:bg-forest/30" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 transition-opacity group-hover:opacity-100">
-                    <span className="rounded-md bg-black/60 px-3 py-1.5 text-sm font-medium text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30 scale-75 group-hover:scale-100 transition-transform duration-500">
+                      <Search className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <p className="text-white font-semibold text-lg drop-shadow-lg">
                       {project.title}
-                    </span>
-                    <span className="ml-2 rounded-md bg-sage/80 px-2 py-1 text-xs text-white">
-                      {project.category}
-                    </span>
+                    </p>
+                    <div className="flex items-center gap-2 mt-1.5">
+                      <span className="rounded-full bg-sage/80 px-3 py-0.5 text-xs font-medium text-white">
+                        {project.category}
+                      </span>
+                    </div>
                   </div>
                 </button>
               </motion.div>
@@ -120,7 +143,13 @@ export default function ProjectGallery({
         </div>
 
         {filtered.length === 0 && (
-          <p className="text-center text-stone py-12">No projects found in this category.</p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center text-stone py-16 text-lg"
+          >
+            No projects found in this category.
+          </motion.p>
         )}
       </div>
 

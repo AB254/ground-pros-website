@@ -52,10 +52,10 @@ export default async function ServicesPage() {
   });
 
   return (
-    <div className="pt-24">
-      <section className="relative bg-forest text-white py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1600&q=80')] bg-cover bg-center opacity-15" />
-        <div className="absolute inset-0 bg-gradient-to-b from-forest/80 to-forest" />
+    <div>
+      <section className="relative bg-black text-white pt-40 pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.groundpros.com/wp-content/uploads/2014/07/Service-Banner7.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative max-w-6xl mx-auto px-6 text-center">
           <ScrollReveal>
             <span className="inline-block font-mono text-sm uppercase tracking-[0.2em] text-sage mb-4">
@@ -83,11 +83,15 @@ export default async function ServicesPage() {
                   <div className={`grid lg:grid-cols-2 gap-12 items-center ${isReversed ? 'lg:flex-row-reverse' : ''}`}>
                     <div className={isReversed ? 'lg:order-2' : ''}>
                       <div className="relative group">
-                        <div
-                          className="aspect-[4/3] rounded-2xl bg-cover bg-center overflow-hidden shadow-lg"
-                          style={imageUrl ? { backgroundImage: `url(${imageUrl})` } : undefined}
-                        >
-                          {!imageUrl && (
+                        <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+                          {imageUrl ? (
+                            <img
+                              src={imageUrl}
+                              alt={service.title}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          ) : (
                             <div className="w-full h-full bg-gradient-to-br from-forest to-pine flex items-center justify-center">
                               <Icon className="w-20 h-20 text-white/30" />
                             </div>

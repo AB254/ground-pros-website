@@ -58,9 +58,9 @@ export default function StatsCounter({ stats, className }: StatsCounterProps) {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} id="stats" className={cn('relative bg-forest py-20 overflow-hidden', className)}>
-      <div className="absolute inset-0 bg-gradient-to-r from-forest via-pine/30 to-forest opacity-50" />
-      <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-10 px-6 md:grid-cols-4">
+    <section ref={ref} id="stats" className={cn('relative py-20 overflow-hidden', className)}>
+      <div className="absolute inset-0 bg-black/70 z-[1]" />
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-2 gap-10 px-6 md:grid-cols-4">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}

@@ -58,16 +58,16 @@ export default async function ServiceDetailPage({ params }: Props) {
   });
 
   return (
-    <div className="pt-24">
+    <div>
       {/* Hero with background image */}
-      <section className="relative bg-forest text-white py-28 overflow-hidden">
+      <section className="relative bg-black text-white pt-40 pb-28 overflow-hidden">
         {heroImage && (
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-25"
+            className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${heroImage})` }}
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-forest/70 to-forest" />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative max-w-6xl mx-auto px-6">
           <ScrollReveal>
             <Link

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Toggle } from "@/components/ui/Toggle";
 import { useToast } from "@/components/admin/Toast";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import { slugify } from "@/lib/utils";
 import { X } from "lucide-react";
 
@@ -75,7 +76,7 @@ export default function NewServicePage() {
             <Textarea label="Short Description" value={form.shortDesc} onChange={(e) => setForm({ ...form, shortDesc: e.target.value })} required />
             <Textarea label="Full Description" value={form.fullDesc} onChange={(e) => setForm({ ...form, fullDesc: e.target.value })} />
             <Input label="Icon Name (Lucide)" value={form.iconName} onChange={(e) => setForm({ ...form, iconName: e.target.value })} placeholder="e.g. Trees, Snowflake" />
-            <Input label="Image URL" value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} />
+            <ImageUpload label="Service Image" currentImage={form.imageUrl} onUpload={(url) => setForm({ ...form, imageUrl: url })} />
             <Input label="Sort Order" type="number" value={form.sortOrder} onChange={(e) => setForm({ ...form, sortOrder: parseInt(e.target.value) || 0 })} />
 
             <div className="space-y-2">

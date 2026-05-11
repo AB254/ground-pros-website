@@ -2,17 +2,17 @@
 @import "tailwindcss";
 
 :root {
-  --forest: #1a3c0a;
-  --pine: #2d5016;
-  --moss: #4a7c28;
-  --sage: #8fbc4a;
+  --forest: #03755e;
+  --pine: #049a7c;
+  --moss: #05C6A0;
+  --sage: #3dd9b8;
   --charcoal: #1c1c1c;
   --slate: #4a4a4a;
-  --stone: #8a8a7a;
-  --sand: #f5f1eb;
-  --cream: #faf8f4;
+  --stone: #8a8a8a;
+  --sand: #edf7f4;
+  --cream: #f5fbf9;
   --gold: #c5a55a;
-  --earth: #6b4226;
+  --earth: #027a63;
 }
 
 @theme inline {
@@ -52,16 +52,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--sand);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--moss);
+  background: transparent;
   border-radius: 4px;
+  transition: background 0.3s;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--pine);
+body:hover::-webkit-scrollbar-thumb {
+  background: #333;
+}
+
+body:hover::-webkit-scrollbar-thumb:hover {
+  background: #1a1a1a;
 }
 
 @keyframes count-up {
