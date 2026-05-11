@@ -38,7 +38,7 @@ export default function Testimonials({
       ref={ref}
       className={cn('relative py-28 text-white overflow-hidden', className)}
     >
-      <div className="absolute inset-0 bg-[url('https://www.groundpros.com/wp-content/uploads/2019/05/Schaumburg-Corporate-8-e1571424287942.jpg')] bg-cover bg-center bg-fixed" />
+      <div className="absolute inset-0 bg-[url('https://www.groundpros.com/wp-content/uploads/2019/05/Schaumburg-Corporate-8-e1571424287942.jpg')] bg-cover bg-center" />
       <div className="absolute inset-0 bg-black/80" />
 
       <div className="absolute top-0 left-0 w-72 h-72 bg-sage/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl" />

@@ -25,10 +25,12 @@ export default async function HomePage() {
 
   return (
     <>
-      <div
-        className="relative bg-cover bg-fixed bg-center bg-no-repeat bg-black"
-        style={hero?.imageUrl ? { backgroundImage: `url(${hero.imageUrl})` } : { backgroundImage: "url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1600&q=80')" }}
-      >
+      <div className="relative bg-black">
+        <img
+          src={hero?.imageUrl || 'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1600&q=80'}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         {hero?.isVisible !== false && (
           <HeroSection
             heading={hero?.heading ?? "GROUND PROS INC."}

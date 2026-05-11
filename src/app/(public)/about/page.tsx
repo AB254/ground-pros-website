@@ -268,7 +268,7 @@ export default async function AboutPage() {
 
       {/* GPI Gives Back */}
       <section className="relative py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.groundpros.com/wp-content/uploads/2015/03/GPI-Gives-Back-Loaves-Fishes.jpg')] bg-cover bg-center bg-fixed" />
+        <div className="absolute inset-0 bg-[url('https://www.groundpros.com/wp-content/uploads/2015/03/GPI-Gives-Back-Loaves-Fishes.jpg')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-black/75" />
         <div className="relative max-w-6xl mx-auto px-6">
           <ScrollReveal>

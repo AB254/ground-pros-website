@@ -30,7 +30,7 @@ export default function CtaBanner({
       className={cn('relative overflow-hidden py-28', className)}
     >
       <div
-        className="absolute inset-0 bg-cover bg-fixed bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={
           bgImageUrl
             ? { backgroundImage: `url(${bgImageUrl})` }
